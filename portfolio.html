@@ -1,1 +1,361 @@
-এখানে আপনার HTML বসাবেন✅
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SAKIB EDIT | Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --accent: #0ea5e9;
+            --gradient: linear-gradient(135deg, #0ea5e9, #818cf8);
+            --ring-colors: conic-gradient(#0ea5e9, #22d3ee, #818cf8, #c084fc, #0ea5e9);
+        }
+
+        @media (prefers-color-scheme: light) {
+            :root {
+                --bg: #f1f5f9;
+                --card-bg: #ffffff;
+                --text-primary: #1e293b;
+                --text-secondary: #64748b;
+            }
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        body {
+            background-color: var(--bg);
+            color: var(--text-primary);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 450px;
+            animation: fadeIn 0.8s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .profile-card {
+            background-color: var(--card-bg);
+            border-radius: 24px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .image-container {
+            position: relative;
+            width: 148px;
+            height: 148px;
+            margin: 0 auto 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .ring {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            background: var(--ring-colors);
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes rotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .profile-img {
+            position: relative;
+            width: 132px;
+            height: 132px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--card-bg);
+            z-index: 2;
+        }
+
+        .name-section {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-bottom: 5px;
+        }
+
+        .name {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .verified {
+            color: #1da1f2;
+            font-size: 1.2rem;
+        }
+
+        .bio-typing {
+            color: var(--accent);
+            font-weight: 500;
+            font-size: 0.9rem;
+            min-height: 20px;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+
+        .cursor {
+            display: inline-block;
+            width: 2px;
+            animation: blink 0.7s infinite;
+            margin-left: 2px;
+        }
+
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+
+        .info-grid {
+            text-align: left;
+            margin-bottom: 25px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .info-label {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+
+        .info-value {
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .contact-btn {
+            width: 100%;
+            padding: 14px;
+            border: none;
+            border-radius: 12px;
+            background: var(--gradient);
+            color: white;
+            font-weight: 600;
+            font-size: 1rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            transition: transform 0.2s ease;
+        }
+
+        .contact-btn:active {
+            transform: scale(0.98);
+        }
+
+        #contact-section {
+            max-height: 0;
+            overflow: hidden;
+            opacity: 0;
+            transition: max-height 0.4s ease, opacity 0.4s ease, margin-top 0.4s ease;
+        }
+
+        #contact-section.open {
+            max-height: 400px;
+            opacity: 1;
+            margin-top: 20px;
+        }
+
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .contact-link {
+            text-decoration: none;
+            color: white;
+            padding: 12px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            font-size: 0.85rem;
+            font-weight: 500;
+        }
+
+        .full-width { grid-column: span 2; }
+        .bg-fb { background-color: #1877f2; }
+        .bg-msgr { background-color: #0084ff; }
+        .bg-wa { background-color: #25d366; }
+        .bg-tg { background-color: #229ed9; }
+        .bg-yt { background-color: #ff0000; }
+
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .social-icons {
+            margin-top: 15px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            font-size: 1.2rem;
+        }
+
+        .social-icons a {
+            color: var(--text-secondary);
+            transition: color 0.3s;
+        }
+
+        .social-icons a:hover {
+            color: var(--accent);
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="profile-card">
+        <div class="image-container">
+            <div class="ring"></div>
+            <img src="https://private-copper-rbkbupifyw.edgeone.app/Screenshot_20251227-155553_1.jpg" alt="Profile" class="profile-img">
+        </div>
+
+        <div class="name-section">
+            <h1 class="name">SAKIB EDIT</h1>
+            <span class="verified">
+                <span class="fa-stack" style="font-size: 0.5em; vertical-align: middle;">
+                    <i class="fa-solid fa-certificate fa-stack-2x"></i>
+                    <i class="fa-solid fa-check fa-stack-1x fa-inverse" style="font-size: 1.1em; margin-top: -1px;"></i>
+                </span>
+            </span>
+        </div>
+
+        <div class="bio-typing">
+            <span id="typing-text"></span><span class="cursor">|</span>
+        </div>
+
+        <div class="info-grid">
+            <div class="info-row">
+                <span class="info-label">Age</span>
+                <span class="info-value">20+</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Gender</span>
+                <span class="info-value">MALE</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Religion</span>
+                <span class="info-value">ISLAM</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">Country</span>
+                <span class="info-value">BANGLADESH</span>
+            </div>
+            <div class="info-row" style="border:none">
+                <span class="info-label">Address</span>
+                <span class="info-value">BAGERHAT</span>
+            </div>
+        </div>
+
+        <button class="contact-btn" id="toggle-btn">
+            Contact Me <i class="fa-solid fa-chevron-down" id="arrow"></i>
+        </button>
+
+        <div id="contact-section">
+            <div class="contact-grid">
+                <a href="https://www.facebook.com/profile.php?id=61581298987267" class="contact-link bg-fb full-width">
+                    <i class="fa-brands fa-facebook"></i> Facebook
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=61581298987267" class="contact-link bg-msgr">
+                    <i class="fa-brands fa-facebook-messenger"></i> Messenger
+                </a>
+                <a href="https://whatsapp.com/dl/" class="contact-link bg-wa">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+                <a href="https://t.me/sakibshiekh19" class="contact-link bg-tg">
+                    <i class="fa-brands fa-telegram"></i> Telegram
+                </a>
+                <a href="https://youtube.com/@w_1xsakib?si=ApyDYRE45adE_hhN" class="contact-link bg-yt">
+                    <i class="fa-brands fa-youtube"></i> YouTube
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 SAKIB EDIT. All rights reserved.</p>
+        <div class="social-icons">
+            <a href="https://www.facebook.com/profile.php?id=61581298987267"><i class="fa-brands fa-facebook"></i></a>
+            <a href="https://whatsapp.com/dl/"><i class="fa-brands fa-whatsapp"></i></a>
+            <a href="https://t.me/sakibshiekh19"><i class="fa-brands fa-telegram"></i></a>
+            <a href="https://youtube.com/@w_1xsakib?si=ApyDYRE45adE_hhN"><i class="fa-brands fa-youtube"></i></a>
+        </div>
+    </footer>
+</div>
+
+<script>
+    const bioText = "ANIME AND FREE FIRE EDITOR";
+    const typingElement = document.getElementById('typing-text');
+    let i = 0;
+
+    function type() {
+        if (i < bioText.length) {
+            typingElement.textContent += bioText.charAt(i);
+            i++;
+            setTimeout(type, 100);
+        }
+    }
+
+    const toggleBtn = document.getElementById('toggle-btn');
+    const contactSection = document.getElementById('contact-section');
+    const arrow = document.getElementById('arrow');
+
+    toggleBtn.addEventListener('click', () => {
+        contactSection.classList.toggle('open');
+        if (contactSection.classList.contains('open')) {
+            arrow.classList.replace('fa-chevron-down', 'fa-chevron-up');
+        } else {
+            arrow.classList.replace('fa-chevron-up', 'fa-chevron-down');
+        }
+    });
+
+    window.onload = type;
+</script>
+
+</body>
+</html>
